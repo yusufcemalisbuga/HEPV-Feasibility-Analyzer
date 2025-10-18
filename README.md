@@ -207,9 +207,7 @@ python hepv-analyzer.py --duration 600 --dt 0.05 --verbose
 
 ### APA Format
 ```
-ISBUGA, Y. C. (2025). Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis 
-and Practical Limitations. In Proceedings of the 4th International Electronic 
-Conference on Processes. MDPI. 
+İŞBUĞA, Y.C. Hybrid Electric–Pneumatic Propulsion System for Sustainable Urban Transportation: Design and Energy Management Optimization, in Proceedings of the 4th International Electronic Conference on Processes, 20–22 October 2025, MDPI: Basel, Switzerland, 
 ```
 
 ---
