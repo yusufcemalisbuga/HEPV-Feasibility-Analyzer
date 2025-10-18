@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: ISBUGA
+    given-names: Yusuf Cemal
+    email: yisbuga37@gmail.com
+title: "HEPV Feasibility Analyzer"
+version: 3.0.0
+date-released: 2025-01-08
+url: "https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer"
+license: MIT
+keywords:
+  - electric vehicles
+  - thermodynamics
+  - feasibility study
+  - negative results
+  - sustainable transportation
