@@ -223,8 +223,8 @@ C:\sonuc/
   booktitle={Proceedings of the 4th International Electronic Conference on Processes},
   year={2025},
   organization={MDPI},
-  doi={10.3390/XXX},
-  url={https://github.com/yourusername/HEPV-Feasibility-Analyzer}
+  Url=(sciforum)={https://sciforum.net/paper/view/24624}
+  url={https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer}
 }
 ```
 
@@ -232,7 +232,7 @@ C:\sonuc/
 ```
 ISBUGA, Y. C. (2025). Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis 
 and Practical Limitations. In Proceedings of the 4th International Electronic 
-Conference on Processes. MDPI. https://doi.org/10.3390/XXX
+Conference on Processes. MDPI. 
 ```
 
 ---
