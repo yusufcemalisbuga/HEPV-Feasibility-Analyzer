@@ -5,6 +5,8 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-green)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Completed-red)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+
+
 **Author:** Yusuf Cemal ISBUGA  
 **Presented at:** 4th International Electronic Conference on Processes 2025  
 **Research Status:** ❌ Study Terminated - Negative Results Published
@@ -67,7 +69,7 @@ Pneumatic Usage: 0 time steps
 
 ## 🖼️ Visualization Results
 
- [Combined Analysis]([https://hizliresim.com/k9zotsh)
+ [(Combined Analysis)]([https://hizliresim.com/k9zotsh)
 
 **9-Panel Comprehensive Analysis:**
 1. **Driving Cycle** - WLTP-inspired urban pattern (0-50 km/h)
@@ -280,8 +282,8 @@ Conference on Processes. MDPI. https://doi.org/10.3390/XXX
 
 **Yusuf Cemal ISBUGA**  
 📧 yisbuga37@gmail.com  
-🔗 [GitHub Profile](https://github.com/yourusername)  
-🌐 [ORCID](https://orcid.org/0009-0001-7565-9753) *(if available)*
+🔗 [GitHub Profile](github.com/yusufcemalisbuga)  
+🌐 [ORCID](https://orcid.org/0009-0001-7565-9753) 
 
 **Open to:**
 - Peer review feedback
@@ -347,4 +349,3 @@ This simulation uses validated models but makes assumptions about:
 
 **⭐ Star this repo if transparent negative results matter to you!**
 
-<
