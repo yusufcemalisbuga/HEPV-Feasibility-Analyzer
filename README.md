@@ -132,7 +132,7 @@ Heat Transfer:   Q̇ = hA(T - T_amb)  # Ambient cooling
 
 ### Quick Start
 ```bash
-git clone https://github.com/yourusername/HEPV-Feasibility-Analyzer.git
+git clone https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer.git
 cd HEPV-Feasibility-Analyzer
 pip install -r requirements.txt
 
