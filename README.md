@@ -146,30 +146,7 @@ python hepv-analyzer.py --show --save-individual
 python hepv-analyzer.py --duration 600 --dt 0.05 --verbose
 ```
 
-### Command Line Options
-```bash
---out PATH              Output directory (default: C:\sonuc)
---duration SECONDS      Simulation time (default: 400)
---dt SECONDS           Time step (default: 0.1)
---show                 Display plots interactively
---save-individual      Save 9 separate PNG files
---save-combined        Save 3x3 panel (default: True)
---dpi NUMBER           Plot resolution (default: 300)
---no-validation        Skip validation report
---verbose              Detailed console output
-```
 
-### Generated Files
-```
-C:\sonuc/
-├── HEPV_Combined_Analysis.png    # Main result figure
-├── bev_data.csv                  # BEV time series
-├── hepv_data.csv                 # HEPV time series
-├── simulation_summary.txt        # Text report
-└── [01-07]_*.png                 # Individual plots (optional)
-```
-
----
 
 ## 📈 Simulation Parameters
 
