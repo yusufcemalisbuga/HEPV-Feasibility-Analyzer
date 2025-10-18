@@ -67,7 +67,7 @@ Pneumatic Usage: 0 time steps
 
 ## 🖼️ Visualization Results
 
-![Combined Analysis](HEPV_Combined_Analysis.png)
+![Combined Analysis]([https://hizliresim.com/k9zotsh)
 
 **9-Panel Comprehensive Analysis:**
 1. **Driving Cycle** - WLTP-inspired urban pattern (0-50 km/h)
