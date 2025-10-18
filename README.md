@@ -1,4 +1,4 @@
-Mükemmel! Gerçek sonuçlarla güncellenmiş README:
+
 
 ---
 
