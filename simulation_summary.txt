@@ -1,0 +1,24 @@
+======================================================================
+HEPV FEASIBILITY ANALYSIS - SUMMARY REPORT
+Generated: 2025-10-18 20:16:00
+Version: 3.0.0
+======================================================================
+
+Simulation Duration: 400.0 s
+Time Step: 0.100 s
+
+BEV (Baseline):
+  Energy Consumed: 0.198398 kWh
+
+HEPV (Hybrid):
+  Energy Consumed: 0.220374 kWh
+  Pneumatic Usage: 0 time steps
+
+Efficiency Penalty: +11.08%
+
+CONCLUSION:
+HEPV consumes 11.08% MORE energy than BEV.
+Thermodynamic losses prevent commercial viability.
+Study termination decision justified.
+
+======================================================================
