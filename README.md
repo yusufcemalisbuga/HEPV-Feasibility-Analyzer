@@ -51,23 +51,23 @@ cd HEPV-Feasibility-Analyzer
 pip install -r requirements.txt
 
 # Run default simulation (400s urban cycle, 150 bar initial)
-python hepv.py
+python hepv-analyzer.py
 ```
 
 ### Basic Usage
 
 ```bash
 # Show plots interactively
-python hepv.py --show
+python hepv-analyzer.py --show
 
 # Extended simulation with debugging
-python hepv.py --duration 600 --verbose
+python hepv-analyzer.py--duration 600 --verbose
 
 # Export all outputs
-python hepv.py --save-individual --dpi 600
+python hepv-analyzer.py --save-individual --dpi 600
 
 # Custom output directory
-python hepv.py --out ~/my_results
+python hepv-analyzer.py --out ~/my_results
 ```
 
 **Output:** `~/hepv_results/` contains:
