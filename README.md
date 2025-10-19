@@ -1824,16 +1824,17 @@ gantt
     title HEPV Project Timeline
     dateFormat  YYYY-MM-DD
     section Conference
-    Paper submission       :done,    2025-01-15, 1d
-    Peer review           :active,  2025-02-01, 60d
-    Presentation prep     :         2025-08-01, 60d
-    ECP 2025 Conference   :crit,    2025-10-20, 3d
+    Paper submission       :done,    2025-07-17, 1d
+    Peer review            :active,  2025-08-01, 60d
+    Presentation prep      :         2025-08-01, 60d
+    ECP 2025 Conference    :crit,    2025-10-20, 3d
     section Post-Conference
-    Journal submission    :         2025-11-01, 1d
-    Experimental validation :       2026-01-01, 180d
+    Journal submission     :         2025-11-01, 1d
+    Experimental validation:         2026-01-01, 180d
     section Community
-    Educational adoption  :         2025-03-01, 365d
-    Industry impact      :         2025-06-01, 730d
+    Educational adoption   :         2025-03-01, 365d
+    Industry impact        :         2025-06-01, 730d
+
 ```
 
 **Success Criteria:**
