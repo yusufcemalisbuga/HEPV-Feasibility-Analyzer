@@ -1,314 +1,553 @@
-
-
 # HEPV Feasibility Analyzer
-### Hybrid Electric-Pneumatic Vehicle: Thermodynamic Analysis & Control Optimization
 
-[![Conference](https://img.shields.io/badge/Conference-ECP%202025-blue)](https://ecp2025.sciforum.net/)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-green)](https://www.python.org/)
+<div align="center">
+
+### 🔋⚡ Hybrid Electric-Pneumatic Vehicle Simulator
+**Rigorous thermodynamic analysis of compressed air hybridization in urban micro-mobility**
+
+[![Conference](https://img.shields.io/badge/ECP%202025-Accepted-success?logo=academia)](https://ecp2025.sciforum.net/)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Under_Review-orange)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+[![Version](https://img.shields.io/badge/Version-3.3.0--alpha-orange)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+[![DOI](https://img.shields.io/badge/DOI-10.3390%2Fecp2025--XX-blue)](https://sciforum.net/paper/view/24624)
 
-**Author:** Yusuf Cemal ISBUGA  
-**Presented at:** 4th International Electronic Conference on Processes 2025  
-**Research Status:** 🟡 Under Investigation - Control Strategy Sensitivity Analysis
+[**Quick Start**](#-quick-start) • [**Results**](#-key-findings) • [**Research Evolution**](#-research-evolution) • [**Documentation**](#-technical-documentation) • [**Citation**](#-citation)
+
+---
+
+<img src="https://img.shields.io/badge/Status-Under_Peer_Review-blueviolet?style=for-the-badge" alt="Status"/>
+
+**Author:** [Yusuf Cemal ISBUGA](https://orcid.org/0009-0001-7565-9753)  
+**Presented at:** 4th International Electronic Conference on Processes 2025
+
+</div>
 
 ---
 
 ## 🎯 Research Question
-*Can pneumatic-electric hybrid systems compete with pure battery EVs in urban micro-mobility with optimized control strategies?*
 
-**Latest Finding:** 5.18% efficiency **improvement** with active power management (360 pneumatic activations)
+> **Can pneumatic-electric hybrids compete with pure battery EVs in urban applications when modeled with physically accurate thermodynamics?**
 
----
+This single-file Python simulator provides a **transparent, reproducible computational framework** to answer this question through:
 
-## 🔄 Research Evolution
-
-### Version History
-```
-v1.0 (2025-01-08): Passive Control Strategy
-├─ Tank Initial State: Atmospheric pressure (1 bar)
-├─ Trigger Conditions: Conservative thresholds
-├─ Pneumatic Usage: 0 activations
-└─ Result: +11.08% penalty ❌
-
-v3.0 (2025-01-19): Active Control Optimization
-├─ Tank Initial State: Pre-pressurized (300 bar)
-├─ Trigger Conditions: Optimized (v<35km/h, P>3kW, SoC>0.2)
-├─ Pneumatic Usage: 360 activations (9% of cycle)
-└─ Result: -5.18% improvement ⚠️
-```
-
-**Critical Observation:** 16.26% swing demonstrates **control strategy dominates hardware**.
+- ✅ Validated against Tesla Model 3 motor data (MotorXP teardown)
+- ✅ Industrial pneumatic motor efficiency curves (Atlas Copco, Parker Hannifin)
+- ✅ Real-world comparison with Peugeot Hybrid Air trials (2013-2015)
+- ✅ First-principles thermodynamics with heat transfer & leakage
+- ✅ Complete version history showing honest research iteration
 
 ---
 
-## 🔬 What This Project Does
+## 🚀 Quick Start
 
-Rigorous computational simulation comparing:
-- **BEV** (Pure Battery Electric Vehicle) - 450 kg baseline
-- **HEPV** (Hybrid Electric-Pneumatic) - 500 kg with 300-bar air tank
+### Installation
 
-**Validated Physics Models:**
-- ✅ Tesla Model 3 electric motor (92.12% peak efficiency @ 4275 RPM)
-- ✅ Industrial pneumatic motors (Atlas Copco/Parker Hannifin: 25-45% range)
-- ✅ Polytropic compression/expansion with heat transfer
-- ✅ WLTP-inspired urban driving cycle (400s simulation)
-
----
-
-## 📊 Latest Results (v3.0)
-
-### Energy Consumption (400s Urban Cycle)
-```
-┌─────────────────────────────────────┐
-│  BEV:  0.19840 kWh  ✅ BASELINE    │
-│  HEPV: 0.18812 kWh  ✅ -5.18%      │
-└─────────────────────────────────────┘
-
-Pneumatic Usage: 360 time steps (9% of driving cycle)
-Tank Pressure: 300 bar → 200 bar (active discharge)
-```
-
-### Why Results Changed
-```
-🟢 Control Improvements:
-   ├─ Pre-pressurized tank (300 bar initial vs 1 bar)
-   ├─ Lower power threshold (3 kW vs 8 kW)
-   ├─ Active pneumatic assist at urban speeds (<35 km/h)
-   └─ 360 activations distributed across acceleration phases
-
-⚠️  Critical Questions:
-   ├─ Is 300 bar pre-charge realistic? (energy cost not included)
-   ├─ Tank cycling losses (frequent charge/discharge)
-   ├─ Real-world friction vs simulation assumptions
-   └─ Peugeot Hybrid Air achieved only 12% savings (claimed 45%)
-```
-
----
-
-## 🖼️ Visualization Results
-<img width="4766" height="3540" alt="HEPV_Combined_Analysis" src="https://github.com/user-attachments/assets/33ecdcd8-bcd1-4cdc-b95c-a7761a0500f8" />
-
-
-**9-Panel Analysis (v3.0):**
-1. **Driving Cycle** - WLTP-inspired urban pattern (0-50 km/h)
-2. **Battery SoC** - HEPV shows slower discharge
-3. **Tank Pressure** - 300→~200 bar gradual depletion
-4. **Motor Efficiency Map** - Electric still dominates at high speeds
-5. **Power Distribution** - Red spikes show 360 pneumatic activations
-6. **Energy Comparison** - Orange bar (HEPV) now lower
-7. **Tank Temperature** - 20.2°C thermal cycling visible
-8. **BEV Efficiency Histogram** - Mean 77.6% unchanged
-9. **Summary Panel** - "MORE EFFICIENT" (unexpected) flagged
-
----
-
-## 🔍 Critical Analysis
-
-### ⚠️ Result Validation Required
-
-**Positive Indicators:**
-- ✅ Pneumatic motor used 360 times (9% of cycle) - **system is working**
-- ✅ Tank pressure drops from 300→200 bar - **energy is extracted**
-- ✅ Control triggers at optimal conditions (low speed, high power demand)
-- ✅ Temperature cycling minimal (20.2°C max) - **realistic thermodynamics**
-
-**Red Flags:**
-- ⚠️ 300 bar pre-charge energy cost **not included** in comparison
-- ⚠️ Peugeot Hybrid Air real-world: 12% savings (simulation claimed 45%)
-- ⚠️ 5.18% improvement **contradicts v1.0** penalty (+11.08%)
-- ⚠️ Frequent cycling (360 times) may introduce losses not modeled
-
-### 🎯 Next Steps Before Conference
-1. **Sensitivity Analysis:**
-   - Tank initial pressure: 1 bar vs 100 bar vs 300 bar
-   - Power threshold: 3 kW vs 5 kW vs 8 kW
-   - Speed threshold: 25 km/h vs 35 km/h vs 45 km/h
-
-2. **Energy Accounting:**
-   - Include compression energy to reach 300 bar initial state
-   - Model tank cycling degradation (pressure loss per cycle)
-   - Add mechanical friction (valves, pneumatic motor wear)
-
-3. **Literature Comparison:**
-   - Validate against Peugeot Hybrid Air field data
-   - Compare with MDI AirPod efficiency claims
-   - Cross-reference industrial pneumatic motor datasheets
-
----
-
-## 🛠️ Technical Implementation
-
-### Core Physics Models
-```python
-Electric Motor:  η = f(speed, load)  # Tesla M3 validated
-Pneumatic Motor: η = f(speed, pressure)  # Industrial refs (25-45%)
-Thermodynamics:  PV^n = const  # Polytropic n=1.25 (expansion)
-Heat Transfer:   Q̇ = hA(T - T_amb)  # 10% coefficient
-```
-
-### Control Strategy (v3.0)
-```python
-# Pneumatic activation conditions
-use_pneumatic = (
-    speed < 35 km/h AND           # Urban acceleration
-    tank_pressure > 100 bar AND   # Sufficient energy stored
-    power_demand > 3 kW AND       # High torque event
-    battery_soc > 0.2             # Avoid deep discharge
-)
-
-# Power split when active
-P_pneumatic = 0.35 * P_total      # 35% from air
-P_electric = 0.65 * P_total       # 65% from battery
-```
-
-### Key Parameters
-| Parameter | BEV | HEPV (v3.0) | Notes |
-|-----------|-----|-------------|-------|
-| **Mass** | 450 kg | 500 kg | +50 kg penalty |
-| **Battery** | 5 kWh | 5 kWh | Same capacity |
-| **Tank Initial** | N/A | **300 bar** | **Critical assumption** |
-| **Activations** | 0 | **360** | 9% of cycle |
-| **Pneumatic Efficiency** | N/A | ~32% avg | Speed-dependent |
-
----
-
-## 📦 Installation & Usage
-
-### Quick Start
 ```bash
+# Clone repository
 git clone https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer.git
 cd HEPV-Feasibility-Analyzer
+
+# Install dependencies (numpy + matplotlib only)
 pip install -r requirements.txt
 
-# Run v3.0 with optimized control
-python hepv-analyzer.py
-
-# Save all individual plots
-python hepv-analyzer.py --save-individual --dpi 300
-
-# Custom output location
-python hepv-analyzer.py --out /path/to/output
+# Run default simulation (400s urban cycle, 150 bar initial)
+python hepv.py
 ```
 
+### Basic Usage
+
+```bash
+# Show plots interactively
+python hepv.py --show
+
+# Extended simulation with debugging
+python hepv.py --duration 600 --verbose
+
+# Export all outputs
+python hepv.py --save-individual --dpi 600
+
+# Custom output directory
+python hepv.py --out ~/my_results
+```
+
+**Output:** `~/hepv_results/` contains:
+- `combined.png` – 3×3 analysis dashboard
+- `bev.csv`, `hepv.csv` – Time-series data
+- `summary.txt` – Energy comparison report
+
+---
+
+## 📊 Key Findings
+
+<div align="center">
+
+### Energy Consumption Comparison
+
+| Configuration | Version | Energy | vs BEV | Status |
+|--------------|---------|--------|--------|--------|
+| **BEV Baseline** | All | 0.XXXX kWh | — | ✅ Reference |
+| **HEPV Passive** | v1.0 | +11.08% | ❌ Worse | Confirmed failure |
+| **HEPV Active** | v3.0 | **−5.18%** | ⚠️ Better | **Suspicious** |
+| **HEPV Corrected** | v3.3.0 | 🔬 TBD | ❓ | **Under validation** |
+
+</div>
+
+### ⚠️ Critical Discovery (v3.3.0)
+
+**Thermodynamic sign error found in tank pressure calculation:**
+
+```python
+# WRONG (v1.0-3.0): Tank gained pressure during discharge
+dP = -E * (n - 1.0) / V  # Violated conservation of energy
+
+# FIXED (v3.3.0): Correct thermodynamic sign
+dP = E * (n - 1.0) / V   # Pressure decreases when extracting energy
+```
+
+**Impact:** Previous v3.0 results (−5.18% improvement) now **under re-evaluation** with corrected physics.
+
+---
+
+## 🔬 Research Evolution
+
+<details>
+<summary><b>📅 Version History (Click to expand)</b></summary>
+
+### v1.0 (2025-01-08) — Passive Control
+
+```
+Configuration:
+├─ Tank: Started at atmospheric pressure (1 bar)
+├─ Strategy: Conservative thresholds
+├─ Usage: 0 pneumatic activations
+└─ Result: +11.08% penalty ❌
+
+Conclusion: Confirmed commercial failures (Peugeot, MDI AirPod)
+```
+
+### v3.0 (2025-01-19) — Active Optimization
+
+```
+Configuration:
+├─ Tank: Pre-pressurized to 300 bar
+├─ Strategy: Optimized triggers (v<35km/h, P>3kW, SoC>0.2)
+├─ Usage: 360 activations (9% of cycle)
+└─ Result: −5.18% improvement ⚠️
+
+Red flags:
+- 300 bar pre-charge energy not accounted for
+- Sign error allowed impossible pressure increases
+- Used compressor η (60%) instead of motor η (25-45%)
+```
+
+### v3.3.0-alpha (Current) — Thermodynamic Corrections
+
+```
+Critical fixes:
+✅ Tank thermodynamics sign bug (dP = E·(n-1)/V)
+✅ Real pneumatic motor η during discharge (not compressor η)
+✅ Initial tank energy properly calculated from P_init
+✅ Professional logging system (DEBUG/INFO/WARNING/ERROR)
+✅ Realistic regen efficiency = motor_eff(speed,0.2) × η_inverter
+✅ Reduced tank pressure limits (150 bar default, 250 bar regen max)
+
+Status: Under investigation 🔬
+```
+
+</details>
+
+### Why This Matters
+
+This evolution demonstrates **honest scientific iteration**:
+1. **v1.0:** Negative result aligned with real-world failures ✅
+2. **v3.0:** Positive result too good to be true → investigation ⚠️
+3. **v3.3.0:** Root cause found → fundamental physics violated 🔧
+
+---
+
+## 🛠️ Technical Documentation
+
+<details>
+<summary><b>⚙️ System Parameters</b></summary>
+
+| Parameter | BEV | HEPV (v3.3.0) | Notes |
+|-----------|-----|---------------|-------|
+| **Vehicle Mass** | 450 kg | 500 kg | +50 kg pneumatic hardware |
+| **Battery Capacity** | 5 kWh | 5 kWh | Li-ion, same for both |
+| **Motor Peak Power** | 15 kW | 15 kW | Traction motor |
+| **Tank Volume** | N/A | 50 L | Carbon fiber @ 700 bar rated |
+| **Tank Pressure Range** | N/A | 100-300 bar | Operating window |
+| **Initial Pressure** | N/A | **150 bar** | ⬇️ Reduced from 300 |
+| **Compressor η** | N/A | 60% | Regen charging |
+| **Pneumatic Motor η** | N/A | 25-45% | Speed/pressure dependent |
+| **Leak Rate** | N/A | 2%/min | Conservative seal assumption |
+
+</details>
+
+<details>
+<summary><b>🧮 Physics Models</b></summary>
+
+### Electric Motor Efficiency
+
+```python
+def electric_eff(speed_kmh, load_fraction):
+    """
+    Validated against Tesla Model 3 teardown (MotorXP 2018)
+    - Peak: 92.12% @ 4,275 RPM, 91% load
+    - Partial load: 85-90%
+    - Low speed: 75-80%
+    """
+```
+
+### Pneumatic Motor Efficiency
+
+```python
+def pneumatic_eff(speed_kmh, pressure_bar):
+    """
+    Based on Atlas Copco LZB & Parker Hannifin datasheets
+    - Optimal: 40% @ 100-200 bar, <40 km/h
+    - Degrades: High speeds, extreme pressures
+    - Range: 15-45% (realistic industrial data)
+    """
+```
+
+### Polytropic Thermodynamics
+
+```python
+def tank_thermodynamics(Pa, T, Power, dt, charging, eta):
+    """
+    Energy balance with heat transfer:
+    - Compression: n=1.30, η=60%
+    - Expansion: n=1.25, η=variable
+    - Newton cooling: 10% convective coefficient
+    - Leakage: 2%/min pressure loss
+    
+    ✅ CORRECTED: dP = E·(n-1)/V (proper sign convention)
+    """
+```
+
+</details>
+
+<details>
+<summary><b>🎮 Control Strategy</b></summary>
+
+### Pneumatic Activation Logic (v3.3.0)
+
+```python
+if (speed < 35 km/h              # Low-speed torque demand
+    AND pressure > 100 bar       # Sufficient stored energy
+    AND power_demand > 3 kW      # High-torque event (acceleration)
+    AND battery_soc > 0.2        # Avoid deep discharge
+    AND tank_energy > 1 kJ):     # Minimum energy threshold
+    
+    P_pneumatic = 0.35 * P_total  # 35% from compressed air
+    P_electric  = 0.65 * P_total  # 65% from battery
+```
+
+### Regenerative Braking Strategy
+
+```python
+if (braking 
+    AND battery_soc < 0.3 
+    AND tank_pressure < 250 bar):
+    
+    P_battery = 0.75 * P_regen    # 75% to battery
+    P_tank    = 0.25 * P_regen    # 25% recharge air tank
+```
+
+**Note:** Tank pressure limit reduced from 280 bar (v3.0) to **250 bar** (v3.3.0) for realistic fast-fill limitations.
+
+</details>
+
+<details>
+<summary><b>📈 Validation Framework</b></summary>
+
+### Built-in Reference Database
+
+```python
+class ValidationDB:
+    TESLA_M3 = {
+        "source": "MotorXP Teardown Analysis (2018)",
+        "peak_efficiency": 0.9212,
+        "peak_rpm": 4275,
+        "peak_power_kW": 192.4
+    }
+    
+    INDUSTRIAL_PNEUMATIC = {
+        "sources": ("Atlas Copco LZB", "Parker Hannifin"),
+        "efficiency_range": (0.25, 0.45),
+        "optimal_pressure_bar": (6, 8)  # Industrial 6-8 bar optimal
+    }
+    
+    PEUGEOT_TRIALS = {
+        "claimed_saving": 0.45,  # 45% fuel reduction claim
+        "actual_saving": 0.12,   # 12% real-world result
+        "outcome": "Project discontinued 2015"
+    }
+```
+
+Run `python hepv.py` to see validation report on startup.
+
+</details>
 
 ---
 
 ## 🎓 Academic Context
 
-### Conference Presentation
-**Title:** *Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis and Practical Limitations*  
-**Event:** 4th International Electronic Conference on Processes (ECP 2025)  
-**URL** (https://sciforum.net/paper/view/24624)  
-**Status:** Accepted - Under peer review
+### Conference Publication
 
-### Research Contributions
-1. **Control Strategy Impact:** First study quantifying power management influence (16.26% swing)
-2. **Transparent Iteration:** Publishing both negative (v1.0) and positive (v3.0) results
-3. **Critical Self-Review:** Identifying assumptions requiring experimental validation
-4. **Open-Source Model:** Reproducible code for community validation
+**Title:** *Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis and Practical Limitations*  
+**Venue:** 4th International Electronic Conference on Processes (ECP 2025)  
+**URL** [GO](https://sciforum.net/paper/view/24624)  
+**Status:** Accepted – Under peer review
 
 ### Comparison with Literature
-| Study | System | Claimed | Actual | Outcome |
-|-------|--------|---------|--------|---------|
-| **Peugeot Hybrid Air** | 2.0L engine + air | 45% savings | 12% | Discontinued 2015 |
-| **MDI AirPod** | Pure pneumatic | 200 km range | <80 km | Commercial failure |
-| **This study (v1.0)** | EV + air (passive) | Feasible? | -11% penalty | Negative result |
-| **This study (v3.0)** | EV + air (active) | Feasible? | +5% improvement | **Requires validation** |
+
+| System | Study | Claimed | Actual | Outcome |
+|--------|-------|---------|--------|---------|
+| **Hybrid Air** | Peugeot (2013-15) | 45% | 12% | Discontinued |
+| **AirPod** | MDI | 200 km | <80 km | Commercial failure |
+| **HEPV v1.0** | This study | N/A | −11% | Aligns with failures ✅ |
+| **HEPV v3.0** | This study | N/A | **−5%** | **Too optimistic** ⚠️ |
+| **HEPV v3.3.0** | This study | N/A | 🔬 **TBD** | Under validation |
+
+### Research Contributions
+
+1. **Transparent Methodology**
+   - Single-file implementation (zero hidden dependencies)
+   - Complete version history with negative results
+   - Open-source reproducibility
+
+2. **Rigorous Validation**
+   - Industrial motor efficiency data
+   - Real-world failure case studies
+   - First-principles thermodynamics
+
+3. **Critical Self-Review**
+   - Discovered and documented own errors
+   - Simulation-reality gap analysis
+   - Honest uncertainty quantification
+
+---
+
+## 📦 Advanced Usage
+
+
+### Output Files
+
+```
+~/hepv_results/
+├── combined.png          # 3×3 analysis dashboard
+├── cycle.png             # Speed profile
+├── soc.png               # Battery state-of-charge
+├── energy.png            # Energy comparison bar chart
+├── bev.csv               # BEV time-series (time;speed;soc)
+├── hepv.csv              # HEPV time-series (time;speed;soc;pressure)
+└── summary.txt           # Text report with energy delta
+```
+
+### Code Structure
+
+```python
+hepv.py (~800 lines, single file)
+│
+├─ 0. LOGGING & CLI           # argparse + logging setup
+├─ 1. VALIDATION DATABASE     # Tesla M3, industrial references
+├─ 2. PARAMETERS              # Frozen dataclass (immutable)
+├─ 3. PHYSICS MODELS          # Efficiency maps + thermodynamics
+├─ 4. DRIVING CYCLE           # WLTP-inspired urban pattern
+├─ 5. SIMULATORS              # BEV & HEPV forward integration
+├─ 6. PLOT MANAGER            # Matplotlib visualizations
+├─ 7. CSV/REPORT HELPERS      # Data export utilities
+├─ 8. MAIN                    # Orchestration logic
+└─ 9. CLI ENTRY               # if __name__ == "__main__"
+```
+
+---
+
+## 🔮 Roadmap
+
+### ✅ Completed (v3.3.0)
+
+- [x] Fix thermodynamic sign error
+- [x] Implement proper initial energy calculation
+- [x] Add comprehensive logging system
+- [x] Validate against industrial data
+- [x] Document research evolution
+
+### 🎯 Immediate (Pre-Conference)
+
+- [ ] Complete sensitivity analysis (tank size, pressure, thresholds)
+- [ ] Validate against Peugeot field trial data
+- [ ] Monte Carlo uncertainty quantification
+- [ ] Document all assumptions and limitations
+
+### 🚀 Short-Term (Post-Conference)
+
+- [ ] Multi-cycle comparison (highway, mixed urban/highway)
+- [ ] Economic analysis (system cost vs. energy savings)
+- [ ] Machine learning-based control optimization
+- [ ] Experimental validation roadmap
+
+### 🌟 Long-Term Vision
+
+- [ ] Lab test rig validation
+- [ ] Industry collaboration (pneumatic hardware suppliers)
+- [ ] Peer-reviewed journal publication
+- [ ] GUI for non-technical users
 
 ---
 
 ## 📚 Citation
 
-### BibTeX
+### BibTeX (Software)
+
 ```bibtex
-@inproceedings{isbuga2025hepv,
-  title={Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis and Practical Limitations},
-  author={ISBUGA, Yusuf Cemal},
-  booktitle={Proceedings of the 4th International Electronic Conference on Processes},
-  year={2025},
-  organization={MDPI},
-  note={Under peer review},
-  url={https://sciforum.net/event/ECP2025}
+@software{isbuga2025hepv,
+  title   = {HEPV Feasibility Analyzer: Thermodynamic Simulation of 
+             Hybrid Electric-Pneumatic Vehicles},
+  author  = {ISBUGA, Yusuf Cemal},
+  year    = {2025},
+  version = {3.3.0-alpha},
+  url     = {https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer},
+  note    = {Presented at 4th International Electronic Conference on 
+             Processes (ECP 2025)}
+}
+```
+
+### BibTeX (Conference Paper)
+
+```bibtex
+@inproceedings{isbuga2025hepv_paper,
+  title     = {Hybrid Electric-Pneumatic Vehicles: Feasibility Analysis 
+               and Practical Limitations},
+  author    = {ISBUGA, Yusuf Cemal},
+  booktitle = {Proceedings of the 4th International Electronic 
+               Conference on Processes},
+  year      = {2025},
+  publisher = {MDPI},
+  doi       = {N/A},
+  url       = {https://sciforum.net/paper/view/24624}
 }
 ```
 
 ---
 
-## 🚀 Future Work
+## 🤝 Contributing
 
-### Before Final Conclusions:
-1. ✅ **Sensitivity Analysis** - Test all control parameters
-2. ✅ **Energy Accounting** - Include compression costs
-3. ✅ **Experimental Validation** - Build test rig or collaborate with lab
-4. ✅ **Peer Review** - Submit findings to energy systems journal
+### We Welcome
 
-### If Results Hold:
-- Control algorithms matter **more than hardware** in hybrid systems
-- Pre-charged pneumatic assist viable for **urban micro-mobility**
-- Further optimization potential (ML-based power management)
+- 🐛 **Bug reports** – Thermodynamic inconsistencies, numerical errors
+- 💡 **Feature requests** – Alternative control strategies, driving cycles
+- 🔬 **Validation data** – Experimental results, industrial case studies
+- 📖 **Documentation improvements** – Clarifications, translations
+- 🧪 **Code contributions** – Optimization, new physics models
 
-### If Results Fail Validation:
-- Document reasons for simulation-reality gap
-- Identify missing physics (friction, cycling losses, valve dynamics)
-- Publish negative results to guide future research
+### Seeking Collaboration
 
----
+- **Experimental validation:** Test rig design, lab partnerships
+- **Control theory:** Model Predictive Control, reinforcement learning
+- **CFD validation:** Thermodynamic model refinement
+- **Peer review:** Methodology critique, sensitivity analysis
+- **Industry:** Pneumatic hardware suppliers, automotive research labs
 
-## 📧 Contact & Collaboration
+### Contact
 
 **Yusuf Cemal ISBUGA**  
 📧 yisbuga37@gmail.com  
 🔗 [GitHub](https://github.com/yusufcemalisbuga)  
 🌐 [ORCID](https://orcid.org/0009-0001-7565-9753)
 
-**Open to:**
-- Experimental validation partnerships
-- Control theory optimization discussions
-- Peer review feedback on methodology
-- Collaboration on energy systems modeling
+---
+
+## ⚠️ Disclaimer
+
+### Current Status: THERMODYNAMIC CORRECTIONS UNDER VALIDATION
+
+**v3.3.0-alpha represents fundamental physics corrections:**
+
+✅ **Fixed:** Sign error in pressure calculation  
+✅ **Fixed:** Efficiency application (motor vs. compressor)  
+✅ **Fixed:** Initial energy state consistency  
+🔬 **Pending:** Results validation with corrected thermodynamics
+
+### Known Limitations
+
+| Limitation | Impact | Mitigation |
+|------------|--------|------------|
+| **Energy accounting** | Compression energy to 150 bar not in comparison | Document initial state assumptions |
+| **Mechanical losses** | Valve dynamics, pneumatic friction simplified | Conservative efficiency estimates |
+| **Thermal effects** | Heat exchanger idealized (10% coefficient) | Sensitivity analysis planned |
+| **Cycling degradation** | Frequent charge/discharge losses not modeled | Include in future versions |
+| **Environmental factors** | Temperature, traffic, driver variability excluded | Statistical analysis needed |
+
+### Recommendation
+
+**Treat all results as UPPER BOUND until experimental validation.**
+
+The dramatic evolution from:
+- v1.0: **+11% penalty** → Confirmed failure ✅
+- v3.0: **−5% improvement** → Suspicious ⚠️
+- v3.3.0: **TBD** → Under honest reassessment 🔬
+
+demonstrates **extreme sensitivity** to:
+- Control strategy assumptions
+- Thermodynamic model accuracy
+- Initial condition choices
 
 ---
 
 ## 📜 License
 
-MIT License - Free for academic and commercial use with attribution.
+MIT License – Free for academic and commercial use with attribution.
 
----
+```
+Copyright (c) 2025 Yusuf Cemal ISBUGA
 
-## ⚠️ Disclaimer
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-**Current Status:** Results are **simulation-based** and require experimental validation.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-**Known Limitations:**
-- 300 bar pre-charge energy cost not accounted for
-- Valve dynamics and mechanical friction simplified
-- Cycling degradation not modeled
-- Real-world driving variability not captured
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
-**Recommendation:** Treat v3.0 results as **upper bound** pending validation. The dramatic shift from v1.0 (-11%) to v3.0 (+5%) highlights sensitivity to control assumptions.
+Full text: [LICENSE](LICENSE)
 
 ---
 
 <div align="center">
 
-### 🟡 Project Status: UNDER INVESTIGATION
+## 🟡 Project Status
 
-**v1.0 Conclusion:** Passive system commercially unviable (-11% penalty)  
-**v3.0 Conclusion:** Active control shows promise (+5% improvement)  
-**Reality:** Likely somewhere between - **experimental validation required**
+**v1.0:** Passive control → Simulated commercial failure  
+**v3.0:** Active control → Unexpectedly positive (red flag detected)  
+**v3.3.0:** Corrected physics → **Honest reassessment in progress**
 
 ---
 
-*"Control strategy can transform hardware from failure to success - but simulation must be validated against reality."*
+### *"In science, there is no shame in finding your code was wrong.*  
+### *The shame is in not fixing it when you do."*
 
-**⭐ Star this repo to follow the validation process!**
+---
 
-[![Profile Views](https://komarev.com/ghpvc/?username=yusufcemalisbuga&color=orange&style=flat-square&label=Project+Followers)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+⭐ **Star this repository to follow the validation journey!**
+
+[![GitHub stars](https://img.shields.io/github/stars/yusufcemalisbuga/HEPV-Feasibility-Analyzer?style=social)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+[![GitHub forks](https://img.shields.io/github/forks/yusufcemalisbuga/HEPV-Feasibility-Analyzer?style=social)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer/fork)
+[![GitHub watchers](https://img.shields.io/github/watchers/yusufcemalisbuga/HEPV-Feasibility-Analyzer?style=social)](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer)
+
+**Made with ❤️ for open science • Last updated: January 2025**
 
 </div>
-```
-
-
-
-
