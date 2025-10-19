@@ -191,15 +191,6 @@ python hepv-analyzer.py --save-individual --dpi 300
 python hepv-analyzer.py --out /path/to/output
 ```
 
-### Command Line Options
-```bash
---duration SECONDS     Simulation time (default: 400)
---dt SECONDS          Time step (default: 0.1)
---show                Display plots interactively
---save-individual     Save 9 separate PNG files
---dpi NUMBER          Plot resolution (default: 300)
---verbose             Detailed console output
-```
 
 ---
 
