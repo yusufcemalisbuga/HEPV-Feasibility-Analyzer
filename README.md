@@ -1902,7 +1902,7 @@ gantt
 **Built with 🔬 Science • ❤️ Passion • 🌍 Open Source Spirit**
 
 *Last commit:* ![Last Commit](https://img.shields.io/github/last-commit/yusufcemalisbuga/HEPV-Feasibility-Analyzer?color=blue&style=flat-square)  
-*Repository created:* January 2025 • *Still evolving*
+*Repository created:* October  2025 • *Still evolving*
 
 </div>
 ```
