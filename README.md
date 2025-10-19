@@ -311,4 +311,4 @@ MIT License - Free for academic and commercial use with attribution.
 
 
 
-Bu README akademik dürüstlüğü korurken, pozitif sonuçları da şeffaf şekilde sunuyor! 🚀
+
