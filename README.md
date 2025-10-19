@@ -1619,7 +1619,7 @@ Track new projects
 4. Major corrections → new version tag
 
 **Hall of Fame (Contributors):**
-- *Your name here* - First external validation ⭐
+- *YUSUF CEMAL İŞBUĞA[ISBUGA]* - First external validation ⭐
 
 ---
 
