@@ -44,7 +44,8 @@ __author__ = "Yusuf Cemal ISBUGA"
 # 0. CONFIGURATION & CLI
 # ============================================================================
 
-DEFAULT_OUT = pathlib.Path(r"C:\sonuc")
+DEFAULT_OUT = pathlib.Path.home() / "hepv_results"
+
 
 
 def parse_cli() -> argparse.Namespace:
@@ -201,11 +202,12 @@ def power_required(v: float, a: float, m: float) -> float:
 
 
 def speed_to_rpm(kmh: float) -> float:
-    """Convert vehicle speed to motor RPM"""
     v_ms = kmh / 3.6
-    wheel_rps = v_ms / (P.wheel_diam / 2)
-    wheel_rpm = wheel_rps * 60 / (2 * np.pi)
+    wheel_rps = v_ms / (np.pi * P.wheel_diam)
+    wheel_rpm = wheel_rps * 60
     return wheel_rpm * P.gear
+
+
 
 
 def electric_motor_efficiency(kmh: float, load: float) -> float:
@@ -395,70 +397,73 @@ def simulate_hepv(t: np.ndarray, v: np.ndarray) -> Dict:
     dt = t[1] - t[0]
     n = len(t)
     m = P.m0 + P.m_pneu
-    
+
     soc = np.ones(n)
     batt = P.batt_kWh * 3.6e6
-    tankP = np.full(n, P.Pamb)
+    tankP = np.full(n, P.Pmax)  # Pa cinsinden, örn 300 bar -> 300e5 Pa
     tankT = np.full(n, P.Tamb)
     Pe = np.zeros(n)
     Pp = np.zeros(n)
     pneu_count = 0
-    
+
     for k in range(1, n):
         a = (v[k] - v[k-1]) / dt
         Pm = power_required(v[k], a, m)
         kmh = v[k] * 3.6
         p_bar = tankP[k-1] / 1e5
-        
+
         if Pm >= 0:  # Driving
-            # Control strategy: use pneumatic at low speed + high power
-            use_pneu = (kmh < 35 and p_bar > 100 and 
-                       Pm > 8_000 and soc[k-1] > 0.2)
-            
+            # Control strategy: use pneumatic at low speed + sufficient power
+            use_pneu = (kmh < 35 and p_bar > 100 and Pm > 3000 and soc[k-1] > 0.2)
+
             if use_pneu:
                 Pp[k] = 0.35 * Pm
                 Pe[k] = Pm - Pp[k]
                 pneu_count += 1
             else:
                 Pe[k] = Pm
-                Pp[k] = 0
-            
-            # Electric
+                Pp[k] = 0.0
+
+            # Electric consumption
             if Pe[k] > 0:
                 load = Pe[k] / P.motor_Pmax
-                batt -= (Pe[k] / electric_motor_efficiency(kmh, load)) * dt
-            
-            # Pneumatic
+                eta = electric_motor_efficiency(kmh, load)
+                batt -= (Pe[k] / eta) * dt
+
+            # Pneumatic discharge (tank loses pressure)
             if Pp[k] > 0:
                 tankP[k], tankT[k] = tank_thermodynamics(
-                    tankP[k-1], tankT[k-1], Pp[k], dt, False)
+                    tankP[k-1], tankT[k-1], Pp[k], dt, charging=False)
             else:
                 tankP[k], tankT[k] = tankP[k-1], tankT[k-1]
-        
-        else:  # Braking
+
+        else:  # Braking / regeneration
             Preg = -Pm
-            
-            # Split regen energy
+
+            # Split regen energy between battery and tank
             if soc[k-1] < 0.3 or p_bar > 280:
-                Pb, Pt = Preg, 0
+                Pb = Preg
+                Pt = 0.0
             else:
-                Pb, Pt = 0.75 * Preg, 0.25 * Preg
-            
-            # To battery
+                Pb = 0.75 * Preg
+                Pt = 0.25 * Preg
+
+            # To battery (respect charge limit)
             Pb = min(Pb, (P.batt_kWh * 3.6e6 * P.battery_charge_limit - batt) / dt)
             batt += Pb * P.regen_eta * dt
-            
-            # To tank
+
+            # To tank (compressor / storage)
             if Pt > 0:
                 tankP[k], tankT[k] = tank_thermodynamics(
-                    tankP[k-1], tankT[k-1], Pt, dt, True)
+                    tankP[k-1], tankT[k-1], Pt, dt, charging=True)
             else:
                 tankP[k], tankT[k] = tankP[k-1], tankT[k-1]
-            
-            Pe[k], Pp[k] = -Pb, -Pt
-        
+
+            Pe[k] = -Pb
+            Pp[k] = -Pt
+
         soc[k] = np.clip(batt / (P.batt_kWh * 3.6e6), 0, 1)
-    
+
     return {
         'soc': soc,
         'Pe': Pe,
@@ -469,6 +474,7 @@ def simulate_hepv(t: np.ndarray, v: np.ndarray) -> Dict:
         'E_kWh': (P.batt_kWh * 3.6e6 - batt) / 3.6e6,
         'pneu_usage': pneu_count
     }
+    
 
 
 # ============================================================================
