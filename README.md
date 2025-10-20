@@ -507,8 +507,9 @@ pytest tests/test_properties.py --hypothesis-show-statistics
 ## 🎨 Output Examples
 
 ### 📊 Combined Dashboard (3×3 Panel)
+<img width="3578" height="2674" alt="combined" src="https://github.com/user-attachments/assets/eb7677bc-293d-459d-becf-7d70b331726f" />
 
-<img width="4766" alt="Dashboard" src="https://github.com/user-attachments/assets/b61658d0-a0f8-4232-a24e-b073b3947546" />
+
 
 **Panel Breakdown:**
 1. **Driving Cycle** – Urban WLTP pattern
