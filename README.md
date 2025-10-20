@@ -512,12 +512,18 @@ pytest tests/test_properties.py --hypothesis-show-statistics
 
 
 **Panel Breakdown:**
-1. **Driving Cycle** – Urban WLTP pattern
-2. **Battery SoC** – HEPV drains faster (orange line)
-3. **Tank Pressure** – Gradual depletion 150→120 bar
-4. **Motor Efficiency** – Electric dominates (blue)
-5. **Power Split** – Minimal pneumatic usage
-6. **Energy Bar Chart** – HEPV bar taller (worse)
+### Panel Breakdown 
+
+| # | Title on Plot | What It Shows | Engineer’s Key Take-Away |
+|---|---------------|---------------|--------------------------|
+| 1 | Driving Cycle | Vehicle speed versus time for an urban stop-and-go profile (0–50 km h⁻¹ repeatedly). | Confirms a highly transient duty cycle—ideal for evaluating energy-recapture or hybrid assist schemes. |
+| 2 | Battery SoC | State-of-charge trajectory for BEV (blue) and HEPV (orange). Both drop from ≈ 100 % to ≈ 96.3 %. | Pneumatic assist did **not** relieve the battery; both architectures draw virtually the same charge. |
+| 3 | Tank Pressure | Compressed-air tank pressure decays from 150 bar to 135 bar over the cycle. | Quantifies pneumatic energy usage; 15 bar drop equates to roughly 0.8 kg of air consumed. |
+| 4 | Efficiency Maps | Conversion efficiencies: electric motor 75–92 % (blue curve) vs. pneumatic expander 20–30 % (orange). | Pneumatic path operates at roughly one-third the efficiency of the electric drive. |
+| 5 | Power Split | Instantaneous power delivered by the electric (blue) and pneumatic (orange) branches. | Electric path carries almost all the load; pneumatic contribution hovers at only a few kW. |
+| 6 | Total Energy | Cumulative net energy drawn: BEV 0.191 kWh, HEPV 0.197 kWh. | HEPV consumes ≈ 3 % **more** total energy—no net savings despite the hybrid hardware. |
+| 7 | Tank Temperature | Air temperature in the tank cools from 19.7 °C to 17.4 °C during expansion. | Confirms thermodynamic losses (enthalpy drop) in the pneumatic branch. |
+| 8 | Tank Mass | Mass of compressed air falls from 8.9 kg to 8.1 kg. | Direct measure of air usage; ties back to pressure and energy figures. |
 
 ### 📄 CSV Output Format
 
