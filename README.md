@@ -16,7 +16,7 @@
 [**🚀 Quick Start**](#-quick-start) • [**📖 Documentation**](#-documentation) • [**🔬 Physics**](#-physics-models) • [**🏗️ Architecture**](#%EF%B8%8F-architecture) • [**🤝 Contribute**](#-contributing)
 
 ---
-
+> **TL;DR** • 1-file Python HEPV simulator • Result: +2.9 % energy vs BEV • MIT-licensed – PRs welcome
 ## 🎯 What Is This?
 
 A **single-file, production-grade Python simulator** for evaluating hybrid electric-pneumatic propulsion systems. Built for rigorous academic research with:
