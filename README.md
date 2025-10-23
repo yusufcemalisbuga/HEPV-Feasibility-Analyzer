@@ -599,25 +599,6 @@ done
 python analyze_sensitivity.py results/
 ```
 
-### 🐍 Python API Usage
-
-```python
-from O3tamkodupy import urban_cycle, simulate_bev, simulate_hepv
-
-# Generate custom driving cycle
-t, v = urban_cycle(duration=800, dt=0.1)
-
-# Run simulations
-bev_results = simulate_bev(t, v)
-hepv_results = simulate_hepv(t, v)
-
-# Access results
-print(f"BEV energy: {bev_results['E_kWh']:.4f} kWh")
-print(f"HEPV energy: {hepv_results['E_kWh']:.4f} kWh")
-print(f"Tank final: {hepv_results['tankP_bar'][-1]:.1f} bar")
-print(f"Pneu activations: {hepv_results['pneu_use']}")
-```
-
 ---
 
 ## 🤝 Contributing
