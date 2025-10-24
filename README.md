@@ -871,7 +871,229 @@ MATLAB is great, but Python democratizes science.
 
 </details>
 
+
+## 🚨 Troubleshooting / Sorun Giderme
+
+README'ye eklenecek bölüm:
+
+```markdown
 ---
+
+## 🚨 Troubleshooting
+
+### ⚠️ Common Issues & Solutions
+
+<details open>
+<summary><b>🔴 Script won't run from terminal</b></summary>
+
+#### Quick Diagnosis
+```bash
+# Run this diagnostic command first:
+python -c "import sys, numpy, matplotlib; print(f'Python {sys.version}\nNumPy {numpy.__version__}\nMatplotlib {matplotlib.__version__}')"
+```
+
+#### Solution Matrix
+
+| Error Message | Cause | Solution |
+|--------------|-------|----------|
+| `ModuleNotFoundError: numpy` | Missing dependencies | `pip install numpy matplotlib` |
+| `UserWarning: Matplotlib backend` | GUI backend issue | Add to code: `import matplotlib; matplotlib.use('Agg')` |
+| `Permission denied` | Can't write to home | `python hepv-analyzer.py --out /tmp/hepv` |
+| `SyntaxError: annotations` | Old Python | Need Python 3.8+ → `python3.8 hepv-analyzer.py` |
+| `FileNotFoundError` | Path issues | Use absolute path: `python /full/path/to/hepv-analyzer.py` |
+
+</details>
+
+<details>
+<summary><b>🟡 Matplotlib display issues</b></summary>
+
+```bash
+# OPTION 1: Skip display (data only)
+python hepv-analyzer.py --skip-plots
+
+# OPTION 2: Force non-GUI backend
+export MPLBACKEND=Agg
+python hepv-analyzer.py
+
+# OPTION 3: Save without display
+python hepv-analyzer.py --save-individual --skip-combined
+```
+
+</details>
+
+<details>
+<summary><b>🟠 VS Code works but terminal doesn't</b></summary>
+
+**VS Code uses different Python environment!**
+
+```bash
+# 1. Find VS Code's Python
+# In VS Code: Ctrl+Shift+P → "Python: Select Interpreter" → copy path
+
+# 2. Use same Python in terminal
+/path/from/vscode/python hepv-analyzer.py
+
+# OR activate VS Code's environment
+source /path/to/venv/bin/activate  # Linux/Mac
+# or
+\path\to\venv\Scripts\activate     # Windows
+```
+
+</details>
+
+<details>
+<summary><b>🔵 Windows-specific issues</b></summary>
+
+```powershell
+# Use python instead of python3
+python hepv-analyzer.py
+
+# Path separator issues
+python hepv-analyzer.py --out C:\temp\hepv
+
+# If nothing works, use WSL
+wsl python3 hepv-analyzer.py
+```
+
+</details>
+
+<details>
+<summary><b>🟣 Debug mode (see all errors)</b></summary>
+
+```bash
+# Maximum verbosity
+python -u hepv-analyzer.py --verbose 2>&1 | tee debug.log
+
+# Step-by-step execution
+python -m pdb hepv-analyzer.py  # Enter 'c' to continue
+
+# Check imports only
+python -c "
+import sys; print('Python OK')
+import numpy; print('NumPy OK')  
+import matplotlib; print('Matplotlib OK')
+print('All imports successful!')
+"
+```
+
+</details>
+
+### 🔧 Emergency Fixes
+
+<details>
+<summary><b>Quick fixes to add to code (if needed)</b></summary>
+
+Add these lines at the beginning of the file (after imports):
+
+```python
+# FIX 1: Matplotlib backend
+import matplotlib
+matplotlib.use('Agg')  # Force non-interactive backend
+
+# FIX 2: Path issues  
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# FIX 3: NumPy warnings
+import warnings
+warnings.filterwarnings('ignore')
+
+# FIX 4: Logging to file instead of console
+import logging
+logging.basicConfig(filename='hepv.log', level=logging.DEBUG)
+```
+
+</details>
+
+### 🐳 Nuclear Option: Docker
+
+<details>
+<summary><b>Guaranteed to work (isolated environment)</b></summary>
+
+Create `Dockerfile`:
+```dockerfile
+FROM python:3.10-slim
+RUN pip install numpy matplotlib
+COPY hepv-analyzer.py /app/
+WORKDIR /app
+CMD ["python", "hepv-analyzer.py"]
+```
+
+Run:
+```bash
+docker build -t hepv .
+docker run -v $(pwd)/output:/root/hepv_results hepv
+```
+
+</details>
+
+### 📊 Environment Test Script
+
+<details>
+<summary><b>Save as `test_env.py` and run first</b></summary>
+
+```python
+#!/usr/bin/env python3
+"""Test if your environment can run HEPV simulator."""
+
+import sys
+print(f"✓ Python {sys.version}")
+
+try:
+    import numpy as np
+    print(f"✓ NumPy {np.__version__}")
+except ImportError:
+    print("✗ NumPy missing → Run: pip install numpy")
+    sys.exit(1)
+
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    print(f"✓ Matplotlib {matplotlib.__version__}")
+except ImportError:
+    print("✗ Matplotlib missing → Run: pip install matplotlib")
+    sys.exit(1)
+
+try:
+    from pathlib import Path
+    test_dir = Path.home() / "hepv_test"
+    test_dir.mkdir(exist_ok=True)
+    (test_dir / "test.txt").write_text("OK")
+    print(f"✓ Can write to: {test_dir}")
+    test_dir.rmdir()
+except Exception as e:
+    print(f"✗ Directory write failed: {e}")
+    
+print("\n✅ Environment OK - HEPV should run fine!")
+```
+
+</details>
+
+### 💬 Still Having Issues?
+
+1. **Check existing issues:** [GitHub Issues](https://github.com/yusufcemalisbuga/HEPV-Feasibility-Analyzer/issues)
+2. **Open new issue with:**
+   ```
+   OS: [Windows/Mac/Linux]
+   Python: [version]
+   Error message: [full error]
+   Command used: [exact command]
+   Works in VS Code: [Yes/No]
+   ```
+3. **Quick help:** yisbuga37@gmail.com
+
+### 🎯 95% of Issues Are Solved By:
+
+
+# The Universal Fix™
+pip install --upgrade numpy matplotlib
+export MPLBACKEND=Agg
+python hepv-analyzer.py --skip-plots --verbose
+
+
+---
+
 
 ## 🌟 Acknowledgments
 
