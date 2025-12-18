@@ -872,10 +872,7 @@ MATLAB is great, but Python democratizes science.
 </details>
 
 
-## 🚨 Troubleshooting / Sorun Giderme
-
-README'ye eklenecek bölüm:
-
+## 🚨 Troubleshooting / 
 ```markdown
 ---
 
